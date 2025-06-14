@@ -1,9 +1,15 @@
-# Baekjoon-Auto-Notion-ChromeExtension
-
 # ❗The chrome extension is currently under review❗
 
-<img width="640" alt="extension_1" src="https://github.com/user-attachments/assets/f7a59cee-0624-47d9-ae92-cd90101ca91d" />
+![icon128](https://github.com/user-attachments/assets/6f27c50d-d60d-42a2-9a96-b20f406a4b61)
 
-![extension_2](https://github.com/user-attachments/assets/62fd77f4-f968-4e34-b8d9-22faa782ceff)
+**BOJ to Notion Auto Commit**
 
-![extension_3](https://github.com/user-attachments/assets/3bc9d09c-cb51-4de5-9222-3888605d1689)
+is a chrome extension that automatically posts a page in notion when given a BOJ code submission link (https://boj.kr/*)
+
+* Keys
+
+OpenAI API Key : Writes a simple explanation for the code
+
+Notion Integration Token
+
+Notion Page ID
