@@ -28,6 +28,9 @@ A chrome extension that automatically posts a page in notion when given a BOJ co
 
 ## Page View
 
+![notion_page_2](https://github.com/user-attachments/assets/2c9b05bb-4cfe-4218-a9e5-a7c9133b2171)
+
+
 ![notion_page_1](https://github.com/user-attachments/assets/d436c04c-72da-4764-a94c-397160a20c31)
 
 
