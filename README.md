@@ -1,4 +1,4 @@
-# ❗The chrome extension is submitted and currently under review❗
+# ❗The chrome extension is currently under review❗
 
 <img width="1175" alt="Screenshot 2025-06-14 at 8 11 14 PM" src="https://github.com/user-attachments/assets/716077cc-8418-4d9a-9bf1-cd61dc35c990" />
 
