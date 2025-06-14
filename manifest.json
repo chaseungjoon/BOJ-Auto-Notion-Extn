@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "BOJ to Notion Auto Commit",
+  "version": "1.0.0",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "description": "Commit Baekjoon submissions to Notion by pasting a boj.kr code source URL.",
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "host_permissions": [
+    "https://api.allorigins.win/*",
+    "https://www.acmicpc.net/source/*",
+    "https://boj.kr/*",
+    "http://boj.kr/*",
+    "https://solved.ac/problem/*",
+    "https://api.notion.com/*",
+    "https://api.openai.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.acmicpc.net/source/*"],
+      "js": ["content_source.js"]
+    },
+    {
+      "matches": ["https://solved.ac/problem/*"],
+      "js": ["content_solvedac.js"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://api.openai.com https://api.notion.com https://api.allorigins.win https://solved.ac"
+  }
+}
