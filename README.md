@@ -26,7 +26,10 @@ A chrome extension that automatically posts a page in notion when given a BOJ co
 
 [Program Guide (English)](https://www.notion.so/chaseungjoon/Program-Guide-English-21589a009006809e9756c8fa76db93f3?source=copy_link)
 
+
 [Privacy Policy (Korean)](https://www.notion.so/chaseungjoon/BOJ-to-Notion-Auto-Commit-Privacy-Policy-21289a0090068005b2aedf2d9ae4685d?source=copy_link)
+
+[Privacy Policy (English)](https://www.notion.so/chaseungjoon/BOJ-to-Notion-Auto-Commit-Privacy-Policy-English-21589a009006805baed7edd39f1a9a2f?source=copy_link)
 
 ## Page View
 
