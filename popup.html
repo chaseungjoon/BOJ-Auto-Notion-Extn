@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Baekjoon → Notion</title>
+        <style>
+            :root {
+                --accent: #1e88e5;
+                --accent-dark: #1565c0;
+                --bg: #f4f7fb;
+                --radius: 12px;
+            }
+            * {
+                box-sizing: border-box;
+                font-family: Inter, Arial, sans-serif;
+            }
+            body {
+                margin: 0;
+                padding: 1rem 1.2rem;
+                width: 320px;
+                background: var(--bg);
+            }
+            h2 {
+                margin: 0 0 0.6rem;
+                font-size: 1.05rem;
+                font-weight: 600;
+            }
+
+            /* ── 입력 + 눈 아이콘 ── */
+            .input-wrap {
+                position: relative;
+                margin: 0.45rem 0;
+            }
+            input {
+                width: 100%;
+                padding: 0.55rem 0.9rem;
+                border: 1px solid #cbd4e1;
+                border-radius: var(--radius);
+                font-size: 0.9rem;
+                background: #fff;
+            }
+            input:focus {
+                outline: 2px solid var(--accent);
+                border-color: var(--accent);
+            }
+            .eye-btn {
+                position: absolute;
+                right: 0.65rem;
+                top: 50%;
+                transform: translateY(-50%);
+                border: none;
+                background: none;
+                cursor: pointer;
+                padding: 0;
+                opacity: 0.55;
+                transition: 0.15s;
+            }
+            .eye-btn:hover {
+                opacity: 0.9;
+            }
+            .eye-btn svg {
+                width: 18px;
+                height: 18px;
+                fill: #607d8b;
+            }
+
+            /* ── 메인 액션 버튼 ── */
+            button.action {
+                width: 100%;
+                padding: 0.55rem 0;
+                margin: 0.7rem 0 0;
+                border: none;
+                border-radius: var(--radius);
+                background: var(--accent);
+                color: #fff;
+                font-size: 0.94rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: 0.15s;
+            }
+            button.action:hover {
+                background: var(--accent-dark);
+            }
+
+            /* ── Logout 링크 (가운데·흰색) ── */
+            button.link-btn {
+                display: block;
+                width: 100%;
+                border: none;
+                background: none;
+                margin: 0.3rem 0 0;
+                font-size: 0.78rem;
+                color: #fff;
+                text-decoration: underline;
+                text-align: center;
+                text-shadow: 0 0 2px #000;
+                cursor: pointer;
+            }
+            button.link-btn:hover {
+                opacity: 0.8;
+            }
+
+            /* 로그 */
+            #log {
+                list-style: none;
+                padding-left: 0;
+                margin: 0.7rem 0 0;
+                font-size: 0.8rem;
+                line-height: 1.35rem;
+            }
+            #setupMsg {
+                font-size: 0.8rem;
+                color: #d32f2f;
+                margin-top: 0.3rem;
+            }
+            .hidden {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ── 1. 설정 화면 ── -->
+        <div id="setupScreen">
+            <h2>키 입력</h2>
+
+            <div class="input-wrap">
+                <input
+                    type="password"
+                    id="openaiKey"
+                    placeholder="OpenAI API Key (선택)"
+                />
+                <button
+                    class="eye-btn"
+                    data-target="openaiKey"
+                    title="보기/숨기기"
+                ></button>
+            </div>
+
+            <div class="input-wrap">
+                <input
+                    type="password"
+                    id="notionToken"
+                    placeholder="Notion Integration Token"
+                />
+                <button
+                    class="eye-btn"
+                    data-target="notionToken"
+                    title="보기/숨기기"
+                ></button>
+            </div>
+
+            <div class="input-wrap">
+                <input id="notionParent" placeholder="Notion Page ID" />
+            </div>
+
+            <button id="saveSet" class="action">Save</button>
+            <p id="setupMsg"></p>
+        </div>
+
+        <!-- ── 2. 메인 화면 ── -->
+        <div id="mainScreen" class="hidden">
+            <h2>소스 URL 붙여넣기</h2>
+            <div class="input-wrap">
+                <input
+                    id="urlInput"
+                    placeholder="http://boj.kr/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                />
+            </div>
+
+            <button id="importBtn" class="action">Import & Commit</button>
+            <button id="logoutBtn" class="link-btn">Logout</button>
+
+            <ul id="log"></ul>
+        </div>
+
+        <script src="popup.js"></script>
+    </body>
+</html>
