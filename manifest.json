@@ -8,7 +8,7 @@
     "128": "icon128.png"
   },
   "description": "Commit Baekjoon submissions to Notion by pasting a boj.kr code source URL.",
-  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "permissions": ["storage"],
   "host_permissions": [
     "https://api.allorigins.win/*",
     "https://www.acmicpc.net/source/*",
