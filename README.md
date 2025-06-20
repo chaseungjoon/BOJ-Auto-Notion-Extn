@@ -1,12 +1,10 @@
-# ❗The chrome extension is currently under review❗
+## BOJ to Notion Auto Commit
 
-<img width="1175" alt="Screenshot 2025-06-14 at 8 11 14 PM" src="https://github.com/user-attachments/assets/716077cc-8418-4d9a-9bf1-cd61dc35c990" />
-
-<br><br>
 
 ![icon128](https://github.com/user-attachments/assets/6f27c50d-d60d-42a2-9a96-b20f406a4b61)
 
-## BOJ to Notion Auto Commit
+[Download Link](https://github.com/chaseungjoon/Baekjoon-Auto-Notion-ChromeExtension.git)
+
 
 A chrome extension that automatically posts a page in notion when given a BOJ code submission link (https://boj.kr/#########)
 
