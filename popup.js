@@ -1,5 +1,3 @@
-/* popup.js – 눈/눈-슬래시 토글 + Logout + OpenAI 키 선택 입력 */
-
 const $ = (id) => document.getElementById(id);
 const addLog = (txt) => {
   const li = document.createElement("li");
@@ -7,7 +5,6 @@ const addLog = (txt) => {
   $("log").append(li);
 };
 
-/* SVG 아이콘 */
 const EYE =
   '<svg viewBox="0 0 24 24"><path d="M12 5C7 5 2.73 8.11 1 12c1.73 3.89 6 7 11 7s9.27-3.11 11-7c-1.73-3.89-6-7-11-7Zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10Zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>';
 const EYE_OFF =
@@ -20,13 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
       : show("setupScreen"),
   );
 
-  /* 저장 */
   $("saveSet").onclick = () => {
     const cfg = {
       openaiKey: $("openaiKey").value.trim(),
       notionToken: $("notionToken").value.trim(),
       notionParent: $("notionParent").value.trim(),
-      openaiOn: !!$("openaiKey").value.trim(), // 입력되면 true
+      openaiOn: !!$("openaiKey").value.trim(),
     };
     if (!cfg.notionToken || !cfg.notionParent) {
       $("setupMsg").textContent = "❗ Notion 토큰·Parent ID는 필수입니다.";
@@ -35,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     chrome.storage.local.set(cfg, () => show("mainScreen"));
   };
 
-  /* Import */
   $("importBtn").onclick = () => {
     const url = $("urlInput").value.trim();
     if (!/^https?:\/\/boj\.kr\/[0-9a-f]{32}$/i.test(url)) {
@@ -47,12 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
     chrome.runtime.sendMessage({ action: "processURL", url });
   };
 
-  /* Logout */
   $("logoutBtn").onclick = () => {
     chrome.storage.local.clear(() => show("setupScreen"));
   };
 
-  /* 눈 토글 */
   document.querySelectorAll(".eye-btn").forEach((btn) => {
     btn.innerHTML = EYE; // 초기 아이콘
     btn.onclick = () => {
@@ -63,14 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   });
 
-  /* 백그라운드 로그 */
   chrome.runtime.onMessage.addListener((m) => {
     if (m.type === "log") addLog(m.text);
     if (m.type === "done") addLog("✅ 완료");
   });
 });
 
-/* 화면 전환 */
 function show(id) {
   ["setupScreen", "mainScreen"].forEach((s) =>
     $(s).classList.toggle("hidden", s !== id),

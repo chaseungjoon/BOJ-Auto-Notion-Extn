@@ -1,6 +1,3 @@
-/* background.js — 평문 Local-Storage, Solved.ac 3 회 재시도 + HTML fallback */
-
-/* ========== 0. 유틸 ========== */
 const nbsp = "\u00A0";
 const log = (txt) => chrome.runtime.sendMessage({ type: "log", text: txt });
 const done = () => chrome.runtime.sendMessage({ type: "done" });
@@ -14,9 +11,7 @@ const waitTab = (id) =>
     });
   });
 
-/* ========== 1. 언어 매핑 ========== */
 const notionLang = {
-  /* C 계열 */
   C: "c",
   C89: "c",
   C90: "c",
@@ -28,7 +23,6 @@ const notionLang = {
   "C90 (Clang)": "c",
   "C2x (Clang)": "c",
 
-  /* C++ 계열 */
   "C++": "c++",
   "C++11": "c++",
   "C++14": "c++",
@@ -41,7 +35,6 @@ const notionLang = {
   "C++17 (Clang)": "c++",
   "C++20 (Clang)": "c++",
 
-  /* 주요 언어 */
   Python: "python",
   "Python 3": "python",
   PyPy3: "python",
@@ -76,14 +69,11 @@ const notionLang = {
 };
 const toNotionLang = (s) => notionLang[s.trim()] ?? "Plain Text";
 
-/* ========== 2. 메시지 엔트리 ========== */
 chrome.runtime.onMessage.addListener((m) => {
   if (m.action === "processURL") void runFlow(m.url);
 });
 
-/* ========== 3. 전체 플로우 ========== */
 async function runFlow(url) {
-  /* 3-1. 소스 페이지 스크랩 */
   log("1️⃣ 소스 페이지 로딩…");
   const srcTab = await chrome.tabs.create({ url, active: false });
   await waitTab(srcTab.id);
@@ -102,24 +92,20 @@ async function runFlow(url) {
     return done();
   }
 
-  /* 3-2. Solved.ac 메타 데이터 */
   const info = await fetchSolvedInfo(src.problem);
   if (!info) {
     log("❌ Solved.ac 정보 최종 실패");
     return done();
   }
 
-  /* 3-3. Notion 업로드 */
-  const keys = await chrome.storage.local.get(null); // 평문 키 직접 조회
+  const keys = await chrome.storage.local.get(null);
   await uploadToNotion(src, info, keys);
 }
 
-/* ========== 4. Solved.ac 정보 (재시도 + HTML fallback) ========== */
 async function fetchSolvedInfo(pid) {
   const apiRaw = `https://solved.ac/api/v3/problem/show?problemId=${pid}`;
   let info = null;
 
-  /* 4-1. AllOrigins 3회 재시도 */
   for (let t = 1; t <= 3 && !info; t++) {
     const url = `https://api.allorigins.win/raw?nocache=${Date.now()}&url=${encodeURIComponent(apiRaw)}`;
     try {
@@ -140,7 +126,6 @@ async function fetchSolvedInfo(pid) {
     }
   }
 
-  /* 4-2. 실패 시 HTML 파싱 */
   if (!info) {
     log("⚠️ 프록시 실패 → HTML 파싱 시도");
     const tab = await chrome.tabs.create({
@@ -155,14 +140,12 @@ async function fetchSolvedInfo(pid) {
   return info;
 }
 
-/* ========== 5. Notion 업로드 ========== */
 async function uploadToNotion(src, info, keys) {
   if (!keys.notionToken) {
     log("❌ Notion 토큰 없음");
     return done();
   }
 
-  /* GPT 주석 (선택) */
   let comment = "";
   if (keys.openaiOn && keys.openaiKey) {
     log("4️⃣ GPT-4o-mini 주석 생성…");
@@ -190,14 +173,12 @@ async function uploadToNotion(src, info, keys) {
     }
   }
 
-  /* 메모리·시간·길이 Quote */
   const quote = [
     `Memory${nbsp}${src.extra[0]}`,
     `Time${nbsp}${src.extra[1]}`,
     `Code${nbsp}Len${nbsp}${src.extra[2]}`,
   ].join(nbsp.repeat(4));
 
-  /* 블록 구성 */
   const blocks = [
     paragraph("문제 링크", `https://www.acmicpc.net/problem/${src.problem}`),
     callout("💡", info.tags.join("/")),
@@ -206,7 +187,6 @@ async function uploadToNotion(src, info, keys) {
   ];
   if (comment) blocks.push(paragraph(comment));
 
-  /* Notion 페이지 생성 */
   const body = {
     parent: parentObj(keys.notionParent),
     icon: {
@@ -237,7 +217,6 @@ async function uploadToNotion(src, info, keys) {
   done();
 }
 
-/* ========== 6. 블록 헬퍼 ========== */
 const text = (c) => ({ type: "text", text: { content: c } });
 const paragraph = (c, url) => ({
   object: "block",
