@@ -3,7 +3,7 @@
 
 ![icon128](https://github.com/user-attachments/assets/6f27c50d-d60d-42a2-9a96-b20f406a4b61)
 
-[Download Link](https://github.com/chaseungjoon/Baekjoon-Auto-Notion-ChromeExtension.git)
+[Download Link](https://chromewebstore.google.com/detail/boj-to-notion-auto-commit/loefcmlenimjioeanicpcgdoildpklhh?authuser=1&hl=ko)
 
 
 A chrome extension that automatically posts a page in notion when given a BOJ code submission link (https://boj.kr/#########)
